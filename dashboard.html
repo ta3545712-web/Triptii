@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HostelEase - Dashboard</title>
+  <link rel="stylesheet" href="/css/style.css" />
+  <script src="/js/main.js" defer></script>
+</head>
+
+<body>
+  <header>
+    <h1>Student Dashboard</h1>
+  </header>
+
+  <main>
+    <section class="info-card">
+      <h2>Your Room Details</h2>
+      <p>Room No: B-204</p>
+      <p>Hostel: Girls Hostel Block B</p>
+    </section>
+
+    <section class="info-card">
+      <h2>Mess Menu</h2>
+      <ul>
+        <li>Monday: Rajma Chawal</li>
+        <li>Tuesday: Aloo Paratha</li>
+        <li>Wednesday: Chole Bhature</li>
+      </ul>
+    </section>
+
+    <section class="info-card">
+      <h2>Mess Rating</h2>
+      <form onsubmit="submitRating(event)">
+        <input type="range" min="1" max="5" step="1" id="messRating">
+        <button type="submit">Submit Rating</button>
+      </form>
+    </section>
+
+    <section class="form-section">
+      <h2>Gate Pass Request</h2>
+      <form onsubmit="submitGatePass(event)">
+        <input type="date" required />
+        <input type="text" placeholder="Reason" required />
+        <button type="submit">Request Gate Pass</button>
+      </form>
+    </section>
+
+    <section class="form-section">
+      <h2>Lodge a Complaint</h2>
+      <form onsubmit="submitComplaint(event)">
+        <input type="text" placeholder="Issue (e.g., Broken fan)" required />
+        <button type="submit">Submit Complaint</button>
+      </form>
+    </section>
+
+    <section class="info-card">
+      <h2>Room Cleaning Request</h2>
+      <form onsubmit="submitCleaningRequest(event)">
+        <input type="date" required />
+        <input type="text" placeholder="Cleaning notes (if any)" required />
+        <button type="submit">Request Cleaning</button>
+      </form>
+    </section>
+
+    <section class="info-card">
+      <h2>Monthly Fee Status</h2>
+      <p>Mess Dues: <span class="paid">Paid</span></p>
+      <p>Room Rent: <span class="pending">Pending</span></p>
+    </section>
+
+    <section class="form-section">
+      <h2>Study Room Booking</h2>
+      <form onsubmit="submitStudyRoomBooking(event)">
+        <select required>
+          <option value="">Select Time</option>
+          <option>6-7 PM</option>
+          <option>7-8 PM</option>
+        </select>
+        <select required>
+          <option value="">Select Room</option>
+          <option>SR-1</option>
+          <option>SR-2</option>
+        </select>
+        <button type="submit">Book</button>
+      </form>
+    </section>
+
+    <section class="info-card">
+      <h2>Poll: Should we include Maggi in the mess?</h2>
+      <button onclick="votePoll('yes')">Yes</button>
+      <button onclick="votePoll('no')">No</button>
+      <div id="pollResults"></div>
+    </section>
+
+    <section class="info-card">
+      <h2>FAQ</h2>
+      <details>
+        <summary>How to apply for a room?</summary>
+        <p>Go to the room booking section and fill out the form.</p>
+      </details>
+      <details>
+        <summary>Forgot password?</summary>
+        <p>Please contact hostel admin to reset your password.</p>
+      </details>
+    </section>
+    <footer>
+       <button onclick="logout()" class="logout-btn">Logout</button>
+    </footer>
+  </main>
+</body>
+
+</html>
