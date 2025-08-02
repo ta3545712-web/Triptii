@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HostelEase | Secure Global Hostel Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #f1f5f9;
+      color: #1e293b;
+    }
+
+    header {
+      background: #1e3a8a;
+      color: white;
+      padding: 24px 16px;
+      text-align: center;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+    }
+
+    header h1 {
+      font-size: 2.8rem;
+    }
+
+    header p {
+      margin-top: 8px;
+      font-size: 1.1rem;
+      color: #cbd5e1;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      padding: 16px;
+      background-color: #ffffff;
+      border-bottom: 1px solid #e2e8f0;
+      position: relative;
+    }
+
+    nav a, nav .dropdown {
+      color: #1e3a8a;
+      font-weight: 600;
+      font-size: 1.05rem;
+      text-decoration: none;
+      transition: color 0.2s;
+      cursor: pointer;
+    }
+
+    nav a:hover, nav .dropdown:hover {
+      color: #0f172a;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      border-radius: 6px;
+      overflow: hidden;
+      z-index: 1000;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 12px 20px;
+      white-space: nowrap;
+      color: #1e3a8a;
+      border-bottom: 1px solid #e2e8f0;
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown:hover .dropdown-menu {
+      display: block;
+    }
+
+    .hero {
+      background: linear-gradient(120deg, #dbeafe, #e0f2fe);
+      text-align: center;
+      padding: 80px 20px;
+    }
+
+    .hero h2 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #1e3a8a;
+    }
+
+    .hero p {
+      max-width: 700px;
+      margin: 0 auto;
+      font-size: 1.1rem;
+      color: #334155;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 30px;
+      padding: 60px 20px;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 28px;
+      border-radius: 14px;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.06);
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+    }
+
+    .card h3 {
+      margin-bottom: 12px;
+      color: #1e3a8a;
+      font-size: 1.2rem;
+    }
+
+    .card p {
+      color: #475569;
+      font-size: 0.95rem;
+    }
+
+    footer {
+      background: #1e293b;
+      color: white;
+      text-align: center;
+      padding: 24px 20px;
+      margin-top: 60px;
+    }
+
+    footer p {
+      font-size: 0.9rem;
+    }
+  </style>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const isLoggedIn = sessionStorage.getItem('loggedIn');
+      const navLinks = document.querySelectorAll('nav a');
+      const currentPage = window.location.pathname.split('/').pop();
+
+      if (isLoggedIn === 'true') {
+        navLinks.forEach(link => {
+          if (!link.href.includes('login.html')) {
+            link.classList.add('active');
+          }
+        });
+      } else if (currentPage !== 'login.html' && currentPage !== 'signup.html') {
+        window.location.href = 'login.html';
+      }
+    });
+  </script>
+</head>
+<body>
+  <header>
+    <h1>HostelEase</h1>
+    <p>Secure Global Hostel Management System</p>
+  </header>
+
+  <nav>
+    <a href="rooms.html">Room Booking</a>
+    <a href="mess.html">Mess & Feedback</a>
+    <a href="leave.html">Leave Request</a>
+    <div class="dropdown">
+      <span>Access</span>
+      <div class="dropdown-menu">
+        <a href="login.html">🔐 Login</a>
+        <a href="signup.html">📝 Signup</a>
+        <a href="/mnt/data/login.html" download>⬇️ Download login.html</a>
+        <a href="/mnt/data/signup.html" download>⬇️ Download signup.html</a>
+      </div>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h2>Empowering Global Hostel Living</h2>
+    <p>HostelEase is a global, secure, and professional platform for hostel management. Tailored for students, administrators, and institutions with real-time services like room booking, mess management, and leave automation — all role-based and login-secured.</p>
+  </section>
+
+  <section class="features">
+    <div class="card">
+      <h3>🛏️ Room Management</h3>
+      <p>Real-time room booking, reassignment, and tracking for global hostels.</p>
+    </div>
+    <div class="card">
+      <h3>🍽️ Smart Mess Planner</h3>
+      <p>Check menus, give feedback, and track complaints seamlessly.</p>
+    </div>
+    <div class="card">
+      <h3>📝 Digital Leave System</h3>
+      <p>Apply for leaves with transparent tracking and approval workflow.</p>
+    </div>
+    <div class="card">
+      <h3>🌐 Role-Based Access</h3>
+      <p>Admins, wardens, and students get personalized dashboards and permissions.</p>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 HostelEase. Built for Students. Powered for the World 🌍</p>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Signup | HostelEase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg: #f2f4f8;
+      --card-bg: #ffffff;
+      --primary: #0b5ed7;
+      --primary-hover: #0846a3;
+      --text: #1f2937;
+      --muted: #6b7280;
+      --input-border: #d1d5db;
+      --radius: 10px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: var(--bg);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      background: var(--card-bg);
+      padding: 48px 40px;
+      border-radius: var(--radius);
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+      max-width: 440px;
+      width: 100%;
+    }
+
+    h2 {
+      font-size: 24px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+    }
+
+    label {
+      display: block;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 12px 14px;
+      font-size: 15px;
+      border: 1px solid var(--input-border);
+      border-radius: var(--radius);
+    }
+
+    input:focus, select:focus {
+      border-color: var(--primary);
+      outline: none;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: var(--radius);
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: var(--primary-hover);
+    }
+
+    .footer {
+      margin-top: 20px;
+      font-size: 14px;
+      text-align: center;
+      color: var(--muted);
+    }
+
+    .footer a {
+      color: var(--primary);
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 36px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>Create HostelEase Account</h2>
+    <form onsubmit="return handleSignup(event)">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input id="username" type="text" required />
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input id="password" type="password" required />
+      </div>
+
+      <div class="form-group">
+        <label for="confirm">Confirm Password</label>
+        <input id="confirm" type="password" required />
+      </div>
+
+      <div class="form-group">
+        <label for="role">Role</label>
+        <select id="role" required>
+          <option value="" disabled selected>Select your role</option>
+          <option value="admin">Admin</option>
+          <option value="warden">Warden</option>
+          <option value="student">Student</option>
+        </select>
+      </div>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <div class="footer">
+      Already have an account? <a href="login.html">Login here</a>
+    </div>
+  </div>
+
+  <script>
+    function handleSignup(e) {
+      e.preventDefault();
+
+      const password = document.getElementById("password").value;
+      const confirm = document.getElementById("confirm").value;
+
+      if (password !== confirm) {
+        alert("Passwords do not match!");
+        return false;
+      }
+
+      alert("Signup successful. Redirecting to login...");
+      window.location.href = "login.html";
+      return false;
+    }
+  </script>
+</body>
+</html>

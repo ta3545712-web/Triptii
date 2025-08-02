@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Student Dashboard | Hostel Manager</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --primary: #2563eb;
+      --background: #f9fafb;
+      --text: #1e293b;
+      --muted: #64748b;
+      --card: #ffffff;
+      --hover: #e0e7ff;
+      --radius: 12px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: var(--background);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      width: 220px;
+      background-color: var(--card);
+      padding: 30px 20px;
+      border-right: 1px solid #e2e8f0;
+    }
+
+    .sidebar h2 {
+      font-size: 22px;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .nav-link {
+      display: block;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: var(--text);
+      border-radius: var(--radius);
+      margin-bottom: 12px;
+      font-weight: 500;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+
+    .nav-link:hover,
+    .nav-link.active {
+      background-color: var(--hover);
+      color: var(--primary);
+    }
+
+    .main {
+      flex: 1;
+      padding: 32px;
+    }
+
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card);
+      padding: 16px 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      margin-bottom: 32px;
+    }
+
+    .navbar h1 {
+      font-size: 20px;
+    }
+
+    .dashboard-content {
+      display: grid;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      padding: 24px;
+      border-radius: var(--radius);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    }
+
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .card p {
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .submit-btn {
+      padding: 10px 18px;
+      border: none;
+      background: var(--primary);
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
+    .delete-btn {
+      background-color: #ef4444;
+      color: white;
+      border: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      margin-left: 12px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="sidebar">
+    <h2>Student Panel</h2>
+    <a class="nav-link active" onclick="showSection('overview')">🏠 Overview</a>
+    <a class="nav-link" onclick="showSection('room')">🛏️ Room Details</a>
+    <a class="nav-link" onclick="showSection('complaint')">📩 Complaint Box</a>
+    <a class="nav-link" onclick="alert('Logged out!')">🚪 Logout</a>
+  </div>
+
+  <div class="main">
+    <div class="navbar">
+      <h1>Welcome, Student</h1>
+      <div class="admin-info">student@hostel.com</div>
+    </div>
+
+    <div class="dashboard-content">
+      <!-- Overview -->
+      <div id="overview" class="section">
+        <div class="card">
+          <h3>Profile</h3>
+          <p>Name: Tanya Arora</p>
+          <p>Room: 302</p>
+          <p>Status: Active</p>
+        </div>
+      </div>
+
+      <!-- Room -->
+      <div id="room" class="section" style="display: none;">
+        <div class="card">
+          <h3>Room Details</h3>
+          <p>Room Number: 302</p>
+          <p>Capacity: 3</p>
+          <p>Roommates: Kriti Sinha, Aman Verma</p>
+        </div>
+      </div>
+
+      <!-- Complaint Section -->
+<div id="complaint" class="section" style="display: none;">
+  <div class="card">
+    <h3 style="margin-bottom: 20px;">📩 Lodge a Complaint</h3>
+
+    <form onsubmit="submitComplaint(event)">
+      <div style="margin-bottom: 16px;">
+        <label for="complaintText" style="font-weight: 600; font-size: 15px;">Your Complaint</label>
+        <textarea id="complaintText" placeholder="Describe your issue clearly..." rows="4" required
+          style="width: 100%; padding: 12px; margin-top: 8px; border-radius: 8px; border: 1px solid #d1d5db; resize: vertical; font-size: 14px; font-family: Inter, sans-serif;"></textarea>
+      </div>
+      <button type="submit" class="submit-btn" style="margin-top: 8px;">Submit Complaint</button>
+    </form>
+  </div>
+
+  <div class="card" style="margin-top: 24px;">
+    <h3 style="margin-bottom: 16px;">📜 Your Submitted Complaints</h3>
+    <ul id="complaintList" style="list-style: none; padding-left: 0;"></ul>
+  </div>
+</div>
+
+
+  <script>
+    let complaints = [];
+
+    function showSection(id) {
+      document.querySelectorAll('.nav-link').forEach(link => link.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(sec => sec.style.display = 'none');
+      event.target.classList.add('active');
+      document.getElementById(id).style.display = 'block';
+
+      if (id === 'complaint') {
+        renderComplaints();
+      }
+    }
+
+    function submitComplaint(event) {
+      event.preventDefault();
+      const complaintText = document.getElementById('complaintText').value.trim();
+      if (complaintText !== '') {
+        complaints.push(complaintText);
+        document.getElementById('complaintText').value = '';
+        renderComplaints();
+      } else {
+        alert('Please write a complaint.');
+      }
+    }
+
+    function renderComplaints() {
+      const list = document.getElementById('complaintList');
+      list.innerHTML = '';
+      complaints.forEach((complaint, index) => {
+        const li = document.createElement('li');
+        li.innerHTML = `${complaint} <button class="delete-btn" onclick="deleteComplaint(${index})">Delete</button>`;
+        list.appendChild(li);
+      });
+    }
+
+    function deleteComplaint(index) {
+      complaints.splice(index, 1);
+      renderComplaints();
+    }
+  </script>
+</body>
+</html>

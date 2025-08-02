@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mess Menu & Feedback | Hostel Management</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background-color: #f8fafc;
+      color: #1e293b;
+      padding: 40px 20px;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 40px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    h2 {
+      color: #2563eb;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #e2e8f0;
+      padding: 12px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #2563eb;
+      color: white;
+    }
+
+    label {
+      display: block;
+      margin: 20px 0 8px;
+      font-weight: 600;
+    }
+
+    textarea, select, input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 14px;
+      width: 100%;
+      border: none;
+      border-radius: 10px;
+      background-color: #2563eb;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #1e40af;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🍽️ Weekly Mess Menu</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Day</th>
+          <th>Breakfast</th>
+          <th>Lunch</th>
+          <th>Dinner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Monday</td><td>Poha + Tea</td><td>Dal + Rice + Roti + Sabzi</td><td>Chole Bhature</td></tr>
+        <tr><td>Tuesday</td><td>Idli + Sambhar</td><td>Rajma + Rice + Roti + Salad</td><td>Veg Biryani + Raita</td></tr>
+        <tr><td>Wednesday</td><td>Paratha + Curd</td><td>Paneer + Roti + Rice + Salad</td><td>Khichdi + Papad</td></tr>
+        <tr><td>Thursday</td><td>Upma + Chutney</td><td>Chana Masala + Rice + Roti</td><td>Fried Rice + Manchurian</td></tr>
+        <tr><td>Friday</td><td>Dosa + Sambhar</td><td>Veg Kofta + Roti + Rice</td><td>Pav Bhaji</td></tr>
+        <tr><td>Saturday</td><td>Poori + Aloo Sabzi</td><td>Dal Makhani + Rice + Roti</td><td>Veg Pulao + Raita</td></tr>
+        <tr><td>Sunday</td><td>Chole Kulche</td><td>Special Thali</td><td>Paneer Butter Masala + Naan</td></tr>
+      </tbody>
+    </table>
+
+    <h2>📝 Mess Feedback</h2>
+    <form id="feedbackForm">
+      <label for="day">Select Day</label>
+      <select id="day" required>
+        <option value="">Choose a day</option>
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+        <option>Sunday</option>
+      </select>
+
+      <label for="rating">Food Quality Rating</label>
+      <select id="rating" required>
+        <option value="">Rate the food</option>
+        <option>⭐ Bad</option>
+        <option>⭐⭐ Okay</option>
+        <option>⭐⭐⭐ Good</option>
+        <option>⭐⭐⭐⭐ Very Good</option>
+        <option>⭐⭐⭐⭐⭐ Excellent</option>
+      </select>
+
+      <label for="comments">Complaints / Suggestions</label>
+      <textarea id="comments" placeholder="Describe your experience or any issues..." required></textarea>
+
+      <button type="submit">Submit Feedback</button>
+    </form>
+    <div id="thankYouMsg" style="display:none; text-align:center; color:green; margin-top:20px; font-weight:600;">
+      ✅ Feedback submitted successfully!
+    </div>
+  </div>
+
+  <script>
+    const feedbackForm = document.getElementById("feedbackForm");
+    const thankYouMsg = document.getElementById("thankYouMsg");
+
+    feedbackForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      thankYouMsg.style.display = "block";
+      feedbackForm.reset();
+    });
+  </script>
+</body>
+</html>

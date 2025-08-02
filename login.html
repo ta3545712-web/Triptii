@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login | HostelEase</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #1e3a8a;
+      --primary-dark: #172554;
+      --bg-light: #e2e8f0;
+      --border: #cbd5e1;
+      --error: #dc2626;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-light);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .login-container {
+      background: #fff;
+      padding: 32px;
+      border-radius: 14px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      max-width: 380px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 24px;
+      color: var(--primary);
+    }
+
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 16px;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      background-color: var(--primary);
+      color: white;
+      font-weight: 600;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+    }
+
+    button:hover {
+      background-color: var(--primary-dark);
+    }
+
+    .error {
+      color: var(--error);
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+      text-align: center;
+    }
+
+    .captcha-box {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #f1f5f9;
+      padding: 10px;
+      border-radius: 8px;
+      margin-bottom: 16px;
+      user-select: none;
+      font-weight: bold;
+      letter-spacing: 2px;
+    }
+
+    .refresh-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      color: var(--primary-dark);
+    }
+
+    .footer-note {
+      margin-top: 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: #64748b;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login to HostelEase</h2>
+    <div class="error" id="error-msg"></div>
+    <input type="text" id="username" placeholder="Username (e.g. student)" />
+    <input type="password" id="password" placeholder="Password (e.g. 1234)" />
+
+    <!-- CAPTCHA Display -->
+    <div class="captcha-box">
+      <span id="captcha-code">X7P9</span>
+      <button class="refresh-btn" onclick="generateCaptcha()">🔄</button>
+    </div>
+    <input type="text" id="captcha-input" placeholder="Enter CAPTCHA" />
+
+    <button onclick="login()">Login</button>
+    <div class="footer-note">Demo Login: <strong>student</strong> / <strong>1234</strong></div>
+  </div>
+
+  <script>
+    let currentCaptcha = '';
+
+    function generateCaptcha() {
+      const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+      currentCaptcha = '';
+      for (let i = 0; i < 5; i++) {
+        currentCaptcha += chars.charAt(Math.floor(Math.random() * chars.length));
+      }
+      document.getElementById('captcha-code').textContent = currentCaptcha;
+    }
+
+    function login() {
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const captchaInput = document.getElementById('captcha-input').value.trim();
+      const errorMsg = document.getElementById('error-msg');
+
+      if (!username || !password || !captchaInput) {
+        errorMsg.textContent = 'Please fill all fields including CAPTCHA.';
+        return;
+      }
+
+      if (captchaInput.toUpperCase() !== currentCaptcha.toUpperCase()) {
+        errorMsg.textContent = 'CAPTCHA does not match.';
+        generateCaptcha(); // refresh
+        return;
+      }
+
+      if (username === 'student' && password === '1234') {
+        sessionStorage.setItem('loggedIn', 'true');
+        sessionStorage.setItem('username', username);
+        window.location.href = 'index.html';
+      } else {
+        errorMsg.textContent = 'Invalid username or password.';
+      }
+    }
+
+    // Initialize on load
+    window.onload = generateCaptcha;
+  </script>
+</body>
+</html>
