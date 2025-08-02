@@ -1,114 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HostelEase - Dashboard</title>
-  <link rel="stylesheet" href="/css/style.css" />
-  <script src="/js/main.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HostelPro - Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
+<body class="bg-gray-50 font-poppins">
+<div class="container mx-auto p-4">
+    <div class="flex justify-between items-center mb-6">
+        <h1 class="text-3xl font-bold text-blue-700">HostelPro Dashboard</h1>
+        <div class="flex space-x-4">
+            <button id="profileButton" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"><i class="fas fa-user mr-2"></i>Profile</button>
+            <button id="logoutButton" class="px-4 py-2 bg-red-500 text-white rounded-lg hover:bg-red-600 transition"><i class="fas fa-sign-out-alt mr-2"></i>Logout</button>
+        </div>
+    </div>
 
-<body>
-  <header>
-    <h1>Student Dashboard</h1>
-  </header>
+    <!-- Navigation Tabs -->
+    <div class="flex justify-center space-x-4 mb-6 flex-wrap">
+        <button class="tab-button px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" data-tab="profile"><i class="fas fa-user mr-2"></i>Profile</button>
+        <button class="tab-button px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" data-tab="allocate"><i class="fas fa-bed mr-2"></i>Room Allocation</button>
+        <button class="tab-button px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" data-tab="directory"><i class="fas fa-users mr-2"></i>Student Directory</button>
+        <button class="tab-button px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" data-tab="rooms"><i class="fas fa-door-open mr-2"></i>Room Availability</button>
+        <button class="tab-button px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" data-tab="complaints"><i class="fas fa-exclamation-circle mr-2"></i>Complaints</button>
+        <button class="tab-button px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition" data-tab="analytics"><i class="fas fa-chart-bar mr-2"></i>Analytics</button>
+    </div>
 
-  <main>
-    <section class="info-card">
-      <h2>Your Room Details</h2>
-      <p>Room No: B-204</p>
-      <p>Hostel: Girls Hostel Block B</p>
-    </section>
+    <!-- Profile Section -->
+    <div id="profile" class="tab-content animate-fade-in">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700"><i class="fas fa-user mr-2"></i>User Profile</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <p id="profileInfo" class="mb-4"></p>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">New Password</label>
+                <input id="newPassword" type="password" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter new password (min 6 chars)">
+            </div>
+            <button id="updatePassword" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition"><i class="fas fa-lock mr-2"></i>Update Password</button>
+            <p id="profileMessage" class="mt-2 text-red-500"></p>
+        </div>
+    </div>
 
-    <section class="info-card">
-      <h2>Mess Menu</h2>
-      <ul>
-        <li>Monday: Rajma Chawal</li>
-        <li>Tuesday: Aloo Paratha</li>
-        <li>Wednesday: Chole Bhature</li>
-      </ul>
-    </section>
+    <!-- Room Allocation Section -->
+    <div id="allocate" class="tab-content animate-fade-in">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700"><i class="fas fa-bed mr-2"></i>Room Allocation</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Student Name</label>
+                <input id="studentName" type="text" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter student name">
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Room Number</label>
+                <input id="roomNumber" type="number" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter room number">
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Contact</label>
+                <input id="contact" type="text" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter contact number">
+            </div>
+            <button id="allocateRoom" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"><i class="fas fa-check mr-2"></i>Allocate Room</button>
+            <p id="allocateMessage" class="mt-2 text-red-500"></p>
+        </div>
+    </div>
 
-    <section class="info-card">
-      <h2>Mess Rating</h2>
-      <form onsubmit="submitRating(event)">
-        <input type="range" min="1" max="5" step="1" id="messRating">
-        <button type="submit">Submit Rating</button>
-      </form>
-    </section>
+    <!-- Student Directory Section -->
+    <div id="directory" class="tab-content animate-fade-in">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700"><i class="fas fa-users mr-2"></i>Student Directory</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <input id="searchInput" type="text" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Search by name or room number">
+            </div>
+            <table class="w-full border-collapse">
+                <thead>
+                <tr class="bg-gray-200">
+                    <th class="border p-2">Name</th>
+                    <th class="border p-2">Room</th>
+                    <th class="border p-2">Contact</th>
+                    <th class="border p-2">Action</th>
+                </tr>
+                </thead>
+                <tbody id="studentTable"></tbody>
+            </table>
+        </div>
+    </div>
 
-    <section class="form-section">
-      <h2>Gate Pass Request</h2>
-      <form onsubmit="submitGatePass(event)">
-        <input type="date" required />
-        <input type="text" placeholder="Reason" required />
-        <button type="submit">Request Gate Pass</button>
-      </form>
-    </section>
+    <!-- Room Availability Section -->
+    <div id="rooms" class="tab-content animate-fade-in">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700"><i class="fas fa-door-open mr-2"></i>Room Availability</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <table class="w-full border-collapse">
+                <thead>
+                <tr class="bg-gray-200">
+                    <th class="border p-2">Room Number</th>
+                    <th class="border p-2">Status</th>
+                </tr>
+                </thead>
+                <tbody id="roomTable"></tbody>
+            </table>
+        </div>
+    </div>
 
-    <section class="form-section">
-      <h2>Lodge a Complaint</h2>
-      <form onsubmit="submitComplaint(event)">
-        <input type="text" placeholder="Issue (e.g., Broken fan)" required />
-        <button type="submit">Submit Complaint</button>
-      </form>
-    </section>
+    <!-- Complaints Section -->
+    <div id="complaints" class="tab-content animate-fade-in">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700"><i class="fas fa-exclamation-circle mr-2"></i>Complaint Logging</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Student Name</label>
+                <input id="complaintName" type="text" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter student name">
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Room Number</label>
+                <input id="complaintRoom" type="number" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter room number">
+            </div>
+            <div class="mb-4">
+                <label class="block text-sm font-medium text-gray-700">Complaint</label>
+                <textarea id="complaintText" class="w-full p-3 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" rows="4" placeholder="Describe the complaint"></textarea>
+            </div>
+            <button id="submitComplaint" class="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600 transition"><i class="fas fa-paper-plane mr-2"></i>Submit Complaint</button>
+            <p id="complaintMessage" class="mt-2 text-red-500"></p>
+            <h3 class="text-xl font-semibold mt-6">Complaint List</h3>
+            <ul id="complaintList" class="list-disc pl-5"></ul>
+        </div>
+    </div>
 
-    <section class="info-card">
-      <h2>Room Cleaning Request</h2>
-      <form onsubmit="submitCleaningRequest(event)">
-        <input type="date" required />
-        <input type="text" placeholder="Cleaning notes (if any)" required />
-        <button type="submit">Request Cleaning</button>
-      </form>
-    </section>
-
-    <section class="info-card">
-      <h2>Monthly Fee Status</h2>
-      <p>Mess Dues: <span class="paid">Paid</span></p>
-      <p>Room Rent: <span class="pending">Pending</span></p>
-    </section>
-
-    <section class="form-section">
-      <h2>Study Room Booking</h2>
-      <form onsubmit="submitStudyRoomBooking(event)">
-        <select required>
-          <option value="">Select Time</option>
-          <option>6-7 PM</option>
-          <option>7-8 PM</option>
-        </select>
-        <select required>
-          <option value="">Select Room</option>
-          <option>SR-1</option>
-          <option>SR-2</option>
-        </select>
-        <button type="submit">Book</button>
-      </form>
-    </section>
-
-    <section class="info-card">
-      <h2>Poll: Should we include Maggi in the mess?</h2>
-      <button onclick="votePoll('yes')">Yes</button>
-      <button onclick="votePoll('no')">No</button>
-      <div id="pollResults"></div>
-    </section>
-
-    <section class="info-card">
-      <h2>FAQ</h2>
-      <details>
-        <summary>How to apply for a room?</summary>
-        <p>Go to the room booking section and fill out the form.</p>
-      </details>
-      <details>
-        <summary>Forgot password?</summary>
-        <p>Please contact hostel admin to reset your password.</p>
-      </details>
-    </section>
-    <footer>
-       <button onclick="logout()" class="logout-btn">Logout</button>
-    </footer>
-  </main>
+    <!-- Analytics Section -->
+    <div id="analytics" class="tab-content animate-fade-in">
+        <h2 class="text-2xl font-semibold mb-4 text-blue-700"><i class="fas fa-chart-bar mr-2"></i>Analytics</h2>
+        <div class="bg-white p-6 rounded-lg shadow-md">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                <div class="p-4 bg-blue-100 rounded-lg">
+                    <p class="text-lg font-semibold">Total Rooms</p>
+                    <p id="totalRooms" class="text-2xl"></p>
+                </div>
+                <div class="p-4 bg-green-100 rounded-lg">
+                    <p class="text-lg font-semibold">Occupied Rooms</p>
+                    <p id="occupiedRooms" class="text-2xl"></p>
+                </div>
+                <div class="p-4 bg-yellow-100 rounded-lg">
+                    <p class="text-lg font-semibold">Unresolved Complaints</p>
+                    <p id="unresolvedComplaints" class="text-2xl"></p>
+                </div>
+            </div>
+            <canvas id="roomChart" class="max-w-full"></canvas>
+        </div>
+    </div>
+</div>
+<script src="scripts.js"></script>
 </body>
-
 </html>

@@ -1,42 +1,31 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>HostelEase - Login</title>
-  <link rel="stylesheet" href="/css/style.css" />
-  <script src="/js/main.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HostelPro - Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
-  <header>
-    <h1>🏠 HostelEase</h1>
-    <nav>
-      <a href="index.html">Home</a>
-      <div class="dropdown">
-        <button class="dropbtn">👤 Account</button>
-        <div class="dropdown-content">
-          <a href="login.html">Login</a>
-          <a href="signup.html">Signup</a>
+<body class="bg-gradient-to-br from-blue-400 to-indigo-600 flex items-center justify-center min-h-screen font-poppins">
+<div class="container mx-auto p-6 max-w-md">
+    <div class="bg-white rounded-lg shadow-lg p-8 animate-fade-in">
+        <h1 class="text-3xl font-bold text-center mb-6 text-blue-700"><i class="fas fa-sign-in-alt mr-2"></i>HostelPro Login</h1>
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700">Email</label>
+            <input id="loginEmail" type="email" class="w-full p-3 mt-1 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter your email">
         </div>
-      </div>
-    </nav>
-  </header>
-
-  <main class="form-container">
-    <h2>Login</h2>
-    <form onsubmit="handleLogin(event)">
-      <label for="roll">Roll Number:</label>
-      <input type="text" id="roll" placeholder="Enter Roll Number" required />
-
-      <label for="password">Password:</label>
-      <input type="password" id="password" placeholder="Enter Password" required />
-
-      <button type="submit">Login</button>
-    </form>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 HostelEase. All rights reserved.</p>
-  </footer>
+        <div class="mb-6">
+            <label class="block text-sm font-medium text-gray-700">Password</label>
+            <input id="loginPassword" type="password" class="w-full p-3 mt-1 border rounded-lg focus:border-blue-500 focus:ring focus:ring-blue-200 transition" placeholder="Enter your password">
+        </div>
+        <button id="loginButton" class="w-full px-4 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition flex items-center justify-center"><i class="fas fa-sign-in-alt mr-2"></i>Login</button>
+        <p id="loginMessage" class="mt-4 text-center text-red-500"></p>
+        <p class="mt-6 text-center text-gray-600">Don't have an account? <a href="signup.html" class="text-blue-600 hover:underline">Sign Up</a></p>
+    </div>
+</div>
+<script src="scripts.js"></script>
 </body>
 </html>
